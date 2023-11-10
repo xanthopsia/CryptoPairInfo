@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api;
 
 use App\CryptoPair;
 
 class BinanceAPI
 {
-    private $apiUrl = "https://api4.binance.com/api/v3/ticker/24hr?symbol=";
+    const API_URL = "https://api4.binance.com/api/v3/ticker/24hr?symbol=";
 
     public function getTickerData(CryptoPair $cryptoPair): array
     {
-        $apiUrl = $this->apiUrl . $cryptoPair->getSymbol();
+        $apiUrl = self::API_URL . $cryptoPair->getSymbol();
         $response = file_get_contents($apiUrl);
 
         if (!$response) {
